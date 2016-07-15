@@ -6,14 +6,14 @@ a {
   text-decoration: none !important; }
 
 #container {
-  background: rgba(0, 0, 0, 0.7); }
+  background: rgba(200, 137, 58, 0.7); }
 
 table, td, th {
-  color: white;
-  border: 1px solid black;
+  color: black;
+  border: 1px solid #C8893A;
   padding: 5px;
   border-collapse: collapse;
-  background-color: green; }
+  background-color: #FFD095; }
 
 .num {
   text-align: center; }
@@ -26,4 +26,7 @@ table, td, th {
   vertical-align: middle; }
 
 .camper span {
-  color: white; }
+  color: blue; }
+
+.classOn {
+  color: red; }

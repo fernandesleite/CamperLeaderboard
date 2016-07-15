@@ -68,38 +68,71 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Header = function Header(props) {
+	var Header = function (_React$Component) {
+		_inherits(Header, _React$Component);
 
-		var sort = function sort(props) {};
-		return _react2.default.createElement(
-			'thead',
-			null,
-			_react2.default.createElement(
-				'tr',
-				null,
-				_react2.default.createElement(
-					'th',
+		function Header(props) {
+			_classCallCheck(this, Header);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
+
+			_this.state = { selected1: 'classOn', selected2: 'classOff' };
+			_this.changeSort = _this.changeSort.bind(_this);
+			return _this;
+		}
+
+		_createClass(Header, [{
+			key: 'changeSort',
+			value: function changeSort(e) {
+				var selected = e.target.id;
+				if (selected == 'recent') {
+					this.props.onClickRecent();
+					this.state.selected1 = 'classOn';
+					this.state.selected2 = 'classOff';
+				} else {
+					this.props.onClickAllTime();
+					this.state.selected1 = 'classOff';
+					this.state.selected2 = 'classOn';
+				}
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'thead',
 					null,
-					'#'
-				),
-				_react2.default.createElement(
-					'th',
-					null,
-					'Camper Name'
-				),
-				_react2.default.createElement(
-					'th',
-					{ onClick: props.onClickRecent },
-					'Points in past 30 days'
-				),
-				_react2.default.createElement(
-					'th',
-					{ onClick: props.onClickAllTime },
-					'All time points'
-				)
-			)
-		);
-	};
+					_react2.default.createElement(
+						'tr',
+						null,
+						_react2.default.createElement(
+							'th',
+							null,
+							'#'
+						),
+						_react2.default.createElement(
+							'th',
+							null,
+							'Camper Name'
+						),
+						_react2.default.createElement(
+							'th',
+							{ id: 'recent', className: this.state.selected1, onClick: this.changeSort },
+							'Points in past 30 days'
+						),
+						_react2.default.createElement(
+							'th',
+							{ id: 'alltime', className: this.state.selected2, onClick: this.changeSort },
+							'All time points'
+						)
+					)
+				);
+			}
+		}]);
+
+		return Header;
+	}(_react2.default.Component);
+
+	;
 
 	var Camper = function Camper(props) {
 		return _react2.default.createElement(
@@ -141,20 +174,20 @@
 		);
 	};
 
-	var Data = function (_React$Component) {
-		_inherits(Data, _React$Component);
+	var Data = function (_React$Component2) {
+		_inherits(Data, _React$Component2);
 
 		function Data() {
 			_classCallCheck(this, Data);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Data).call(this));
+			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Data).call(this));
 
-			_this.state = {
+			_this2.state = {
 				users: [],
 				sortAllTime: false,
 				URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/recent'
 			};
-			return _this;
+			return _this2;
 		}
 
 		_createClass(Data, [{
@@ -202,8 +235,8 @@
 
 	;
 
-	var Leaderboard = function (_React$Component2) {
-		_inherits(Leaderboard, _React$Component2);
+	var Leaderboard = function (_React$Component3) {
+		_inherits(Leaderboard, _React$Component3);
 
 		function Leaderboard() {
 			_classCallCheck(this, Leaderboard);

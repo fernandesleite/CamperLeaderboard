@@ -2,21 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-const Header = (props) => {
-
-	const sort = (props) =>{
-
+class Header extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {selected1: 'classOn', selected2: 'classOff'}
+		this.changeSort = this.changeSort.bind(this)
+	}
+	changeSort(e){
+		let selected = e.target.id;
+		if (selected == 'recent'){
+			this.props.onClickRecent();
+			this.state.selected1 = 'classOn';
+			this.state.selected2 = 'classOff';
+		}
+		else{
+			this.props.onClickAllTime();
+			this.state.selected1 = 'classOff';
+			this.state.selected2 = 'classOn';
+		}
+	}
+	render(){
+		return (
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Camper Name</th>
+						<th id='recent' className={this.state.selected1} onClick={this.changeSort}>Points in past 30 days</th>
+						<th id='alltime' className={this.state.selected2} onClick={this.changeSort}>All time points</th>
+					</tr>
+				</thead>
+			);
 	};
-	return (
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Camper Name</th>
-					<th onClick={props.onClickRecent}>Points in past 30 days</th>
-					<th onClick={props.onClickAllTime}>All time points</th>
-				</tr>
-			</thead>
-		);
 };
 
 const Camper = (props) => {
