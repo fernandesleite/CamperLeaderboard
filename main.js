@@ -68,7 +68,9 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Header = function Header() {
+	var Header = function Header(props) {
+
+		var sort = function sort(props) {};
 		return _react2.default.createElement(
 			'thead',
 			null,
@@ -87,12 +89,12 @@
 				),
 				_react2.default.createElement(
 					'th',
-					null,
+					{ onClick: props.onClickRecent },
 					'Points in past 30 days'
 				),
 				_react2.default.createElement(
 					'th',
-					null,
+					{ onClick: props.onClickAllTime },
 					'All time points'
 				)
 			)
@@ -108,7 +110,7 @@
 				null,
 				_react2.default.createElement(
 					'td',
-					null,
+					{ className: 'num' },
 					props.index
 				),
 				_react2.default.createElement(
@@ -127,12 +129,12 @@
 				),
 				_react2.default.createElement(
 					'td',
-					null,
+					{ className: 'num' },
 					props.recent
 				),
 				_react2.default.createElement(
 					'td',
-					null,
+					{ className: 'num' },
 					props.alltime
 				)
 			)
@@ -147,31 +149,58 @@
 
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Data).call(this));
 
-			_this.state = { users: [] };
+			_this.state = {
+				users: [],
+				sortAllTime: false,
+				URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/recent'
+			};
 			return _this;
 		}
 
 		_createClass(Data, [{
+			key: 'sortingAllTime',
+			value: function sortingAllTime() {
+				this.setState({ sortAllTime: true, URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/alltime' }, this.ajaxRequest);
+				console.log('ALLTIME FUNCTION');
+			}
+		}, {
+			key: 'sortingRecent',
+			value: function sortingRecent() {
+				this.setState({ sortAllTime: false, URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/recent' }, this.ajaxRequest);
+				console.log('RECENT FUNCTION');
+				this.componentDidMount();
+			}
+		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+				this.ajaxRequest();
+			}
+		}, {
+			key: 'ajaxRequest',
+			value: function ajaxRequest() {
 				_jquery2.default.ajax({
-					url: 'https://fcctop100.herokuapp.com/api/fccusers/top/recent',
+					url: this.state.URL,
 					dataType: 'json',
 					cache: false,
 					success: function (data) {
 						this.setState({ users: data });
-					}.bind(this)
+					}.bind(this),
+					error: function error(xhr, textStatus, errorThrown) {
+						console.log("Request Failed");
+					}
 				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement(Leaderboard, { users: this.state.users });
+				return _react2.default.createElement(Leaderboard, { onClickRecent: this.sortingRecent.bind(this), onClickAllTime: this.sortingAllTime.bind(this), users: this.state.users });
 			}
 		}]);
 
 		return Data;
 	}(_react2.default.Component);
+
+	;
 
 	var Leaderboard = function (_React$Component2) {
 		_inherits(Leaderboard, _React$Component2);
@@ -191,10 +220,11 @@
 		}, {
 			key: 'render',
 			value: function render() {
+
 				return _react2.default.createElement(
 					'table',
 					null,
-					_react2.default.createElement(Header, null),
+					_react2.default.createElement(Header, { onClickRecent: this.props.onClickRecent, onClickAllTime: this.props.onClickAllTime }),
 					this.props.users.map(this.eachCamper)
 				);
 			}
@@ -202,6 +232,8 @@
 
 		return Leaderboard;
 	}(_react2.default.Component);
+
+	;
 
 	_reactDom2.default.render(_react2.default.createElement(Data, null), document.getElementById('container'));
 
