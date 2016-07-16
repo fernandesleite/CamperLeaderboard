@@ -68,6 +68,18 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var Title = function Title() {
+		return _react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement(
+				'h1',
+				null,
+				'LEADERBOARD FREECODECAMP'
+			)
+		);
+	};
+
 	var Header = function (_React$Component) {
 		_inherits(Header, _React$Component);
 
@@ -135,6 +147,12 @@
 	;
 
 	var Camper = function Camper(props) {
+
+		var Anchor = function Anchor(props, lol) {
+			console.log(props);
+
+			// window.location.href = {"https://www.freecodecamp.com/"+props.username};
+		};
 		return _react2.default.createElement(
 			'tbody',
 			null,
@@ -255,10 +273,15 @@
 			value: function render() {
 
 				return _react2.default.createElement(
-					'table',
+					'div',
 					null,
-					_react2.default.createElement(Header, { onClickRecent: this.props.onClickRecent, onClickAllTime: this.props.onClickAllTime }),
-					this.props.users.map(this.eachCamper)
+					_react2.default.createElement(Title, null),
+					_react2.default.createElement(
+						'table',
+						{ className: 'hovertable' },
+						_react2.default.createElement(Header, { onClickRecent: this.props.onClickRecent, onClickAllTime: this.props.onClickAllTime }),
+						this.props.users.map(this.eachCamper)
+					)
 				);
 			}
 		}]);

@@ -1,27 +1,51 @@
 $background: "../imgs/background.jpg";
+*{
+	font-family:'Roboto', sans-serif;
+}
 
-body {
+body{
 	background: url($background) no-repeat center fixed; 
 	background-size:cover;
+
 }
 a{
 	text-decoration: none !important;
+	display: block; height: 100%;
+}
+h1{
+	margin:10px;
+	text-align:center
 }
 #container{
-	background: rgba(200, 137, 58, 0.7);
-
+	background: rgba(200, 137, 58, 0.5);
+	border-radius:10px;
 }
-table, td, th{
+
+.hovertable{
+	border-collapse: collapse;
+	margin:auto;		
+	tr{
+		background-color:#FFD095;
+		&:hover{
+			background-color:#FFC67E;
+		}
+	}
+}
+
+tr, th{
 	color:black;
 	border: 1px solid #C8893A;
+	border-right:transparent;
+	border-left:transparent;
 	padding:5px;
-	border-collapse: collapse;
 	background-color:#FFD095;
 }
 .num{
 	text-align:center;
 }
 .camper{
+	width:50%;
+	padding:5px 0;
 	.avatar{
 		width:50px;
 		height:50px;
@@ -30,11 +54,16 @@ table, td, th{
 		vertical-align: middle;
 	}
 	span{
-		color:blue;
+		color:black;	
+		&:visited{
 
-
+		}
 	}
 }
 .classOn{
-	color:red;
+	color:#5B3911;
+	text-decoration:underline;
+	&::after{
+		content: " ▼";
+	}
 }

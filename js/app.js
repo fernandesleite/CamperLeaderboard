@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+const Title = () =>{
+	return(<div><h1>LEADERBOARD FREECODECAMP</h1></div>)
+};
+
 class Header extends React.Component{
 	constructor(props){
 		super(props);
@@ -36,6 +40,12 @@ class Header extends React.Component{
 };
 
 const Camper = (props) => {
+
+	const Anchor = (props, lol) =>{
+		console.log(props)
+
+		// window.location.href = {"https://www.freecodecamp.com/"+props.username};
+	}
 	return (
 			<tbody>
 				<tr>
@@ -98,10 +108,13 @@ class Leaderboard extends React.Component {
 	render(){
 
 		return (
-			<table>
-				<Header onClickRecent={this.props.onClickRecent} onClickAllTime={this.props.onClickAllTime}/>
-				{this.props.users.map(this.eachCamper)}
-			</table>
+			<div>
+				<Title/>
+					<table className="hovertable">
+						<Header onClickRecent={this.props.onClickRecent} onClickAllTime={this.props.onClickAllTime}/>
+						{this.props.users.map(this.eachCamper)}
+					</table>
+			</div>
 			);
 	}
 };
