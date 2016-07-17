@@ -71,11 +71,23 @@
 	var Title = function Title() {
 		return _react2.default.createElement(
 			'div',
-			null,
+			{ className: 'title' },
+			_react2.default.createElement('img', { className: 'fcclogo', src: './imgs/fcc-logo.png' }),
 			_react2.default.createElement(
 				'h1',
 				null,
-				'LEADERBOARD FREECODECAMP'
+				'LEADERBOARD'
+			)
+		);
+	};
+	var Footer = function Footer() {
+		return _react2.default.createElement(
+			'div',
+			{ className: 'footer' },
+			_react2.default.createElement(
+				'span',
+				null,
+				'by Bruno Leite (NegativeEdge)'
 			)
 		);
 	};
@@ -115,7 +127,7 @@
 					null,
 					_react2.default.createElement(
 						'tr',
-						null,
+						{ className: 'headerRow' },
 						_react2.default.createElement(
 							'th',
 							null,
@@ -123,7 +135,7 @@
 						),
 						_react2.default.createElement(
 							'th',
-							null,
+							{ className: 'camperName' },
 							'Camper Name'
 						),
 						_react2.default.createElement(
@@ -146,80 +158,89 @@
 
 	;
 
-	var Camper = function Camper(props) {
+	var Camper = function (_React$Component2) {
+		_inherits(Camper, _React$Component2);
 
-		var Anchor = function Anchor(props, lol) {
-			console.log(props);
+		function Camper() {
+			_classCallCheck(this, Camper);
 
-			// window.location.href = {"https://www.freecodecamp.com/"+props.username};
-		};
-		return _react2.default.createElement(
-			'tbody',
-			null,
-			_react2.default.createElement(
-				'tr',
-				null,
-				_react2.default.createElement(
-					'td',
-					{ className: 'num' },
-					props.index
-				),
-				_react2.default.createElement(
-					'td',
-					{ className: 'camper' },
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Camper).apply(this, arguments));
+		}
+
+		_createClass(Camper, [{
+			key: 'Anchor',
+			value: function Anchor() {
+				window.location.href = "https://www.freecodecamp.com/" + this.props.username;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'tbody',
+					null,
 					_react2.default.createElement(
-						'a',
-						{ href: "https://www.freecodecamp.com/" + props.username },
-						_react2.default.createElement('img', { src: props.img, className: 'avatar' }),
+						'tr',
+						{ className: 'camperRow', onClick: this.Anchor.bind(this) },
 						_react2.default.createElement(
-							'span',
-							null,
-							props.username
+							'td',
+							{ className: 'num' },
+							this.props.index
+						),
+						_react2.default.createElement(
+							'td',
+							{ className: 'camper' },
+							_react2.default.createElement('img', { src: this.props.img, className: 'avatar' }),
+							_react2.default.createElement(
+								'span',
+								null,
+								this.props.username
+							)
+						),
+						_react2.default.createElement(
+							'td',
+							{ className: 'num' },
+							this.props.recent
+						),
+						_react2.default.createElement(
+							'td',
+							{ className: 'num' },
+							this.props.alltime
 						)
 					)
-				),
-				_react2.default.createElement(
-					'td',
-					{ className: 'num' },
-					props.recent
-				),
-				_react2.default.createElement(
-					'td',
-					{ className: 'num' },
-					props.alltime
-				)
-			)
-		);
-	};
+				);
+			}
+		}]);
 
-	var Data = function (_React$Component2) {
-		_inherits(Data, _React$Component2);
+		return Camper;
+	}(_react2.default.Component);
+
+	;
+
+	var Data = function (_React$Component3) {
+		_inherits(Data, _React$Component3);
 
 		function Data() {
 			_classCallCheck(this, Data);
 
-			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Data).call(this));
+			var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(Data).call(this));
 
-			_this2.state = {
+			_this3.state = {
 				users: [],
 				sortAllTime: false,
 				URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/recent'
 			};
-			return _this2;
+			return _this3;
 		}
 
 		_createClass(Data, [{
 			key: 'sortingAllTime',
 			value: function sortingAllTime() {
 				this.setState({ sortAllTime: true, URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/alltime' }, this.ajaxRequest);
-				console.log('ALLTIME FUNCTION');
 			}
 		}, {
 			key: 'sortingRecent',
 			value: function sortingRecent() {
 				this.setState({ sortAllTime: false, URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/recent' }, this.ajaxRequest);
-				console.log('RECENT FUNCTION');
-				this.componentDidMount();
 			}
 		}, {
 			key: 'componentDidMount',
@@ -253,8 +274,8 @@
 
 	;
 
-	var Leaderboard = function (_React$Component3) {
-		_inherits(Leaderboard, _React$Component3);
+	var Leaderboard = function (_React$Component4) {
+		_inherits(Leaderboard, _React$Component4);
 
 		function Leaderboard() {
 			_classCallCheck(this, Leaderboard);
@@ -271,17 +292,17 @@
 		}, {
 			key: 'render',
 			value: function render() {
-
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(Title, null),
 					_react2.default.createElement(
 						'table',
-						{ className: 'hovertable' },
+						{ className: 'table' },
 						_react2.default.createElement(Header, { onClickRecent: this.props.onClickRecent, onClickAllTime: this.props.onClickAllTime }),
 						this.props.users.map(this.eachCamper)
-					)
+					),
+					_react2.default.createElement(Footer, null)
 				);
 			}
 		}]);

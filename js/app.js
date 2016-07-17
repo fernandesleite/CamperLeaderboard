@@ -3,9 +3,20 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 const Title = () =>{
-	return(<div><h1>LEADERBOARD FREECODECAMP</h1></div>)
+	return (
+		<div className="title">
+			<img className="fcclogo" src="./imgs/fcc-logo.png"/>
+			<h1>LEADERBOARD</h1>
+		</div>
+	);
 };
-
+const Footer = () =>{
+	return (
+		<div className="footer">
+			<span>by Bruno Leite (NegativeEdge)</span>
+		</div>
+	);
+};
 class Header extends React.Component{
 	constructor(props){
 		super(props);
@@ -28,39 +39,37 @@ class Header extends React.Component{
 	render(){
 		return (
 				<thead>
-					<tr>
+					<tr className="headerRow">
 						<th>#</th>
-						<th>Camper Name</th>
+						<th className="camperName">Camper Name</th>
 						<th id='recent' className={this.state.selected1} onClick={this.changeSort}>Points in past 30 days</th>
 						<th id='alltime' className={this.state.selected2} onClick={this.changeSort}>All time points</th>
 					</tr>
 				</thead>
-			);
+		);
 	};
 };
 
-const Camper = (props) => {
+class Camper extends React.Component {
 
-	const Anchor = (props, lol) =>{
-		console.log(props)
-
-		// window.location.href = {"https://www.freecodecamp.com/"+props.username};
+	Anchor(){
+		window.location.href = "https://www.freecodecamp.com/"+this.props.username;
 	}
-	return (
-			<tbody>
-				<tr>
-					<td className="num">{props.index}</td>
-					<td className="camper">
-						<a href={"https://www.freecodecamp.com/"+props.username}>
-							<img src={props.img} className="avatar"/>
-							<span>{props.username}</span>
-						</a>
+	render(){
+		return (
+				<tbody>
+					<tr className="camperRow" onClick={this.Anchor.bind(this)}>
+						<td className="num">{this.props.index}</td>
+						<td className="camper">
+							<img src={this.props.img} className="avatar"/>
+							<span>{this.props.username}</span>
 						</td>
-					<td className="num">{props.recent}</td>
-					<td className="num">{props.alltime}</td>
-				</tr>
-			</tbody>
-	);
+						<td className="num">{this.props.recent}</td>
+						<td className="num">{this.props.alltime}</td>
+					</tr>
+				</tbody>
+		);
+	}
 };
 class Data extends React.Component{
 	constructor(){
@@ -73,12 +82,9 @@ class Data extends React.Component{
 	};
 	sortingAllTime(){
 		this.setState({sortAllTime: true, URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/alltime'}, this.ajaxRequest);
-		console.log('ALLTIME FUNCTION')
 	};
 	sortingRecent(){
 		this.setState({sortAllTime: false, URL: 'https://fcctop100.herokuapp.com/api/fccusers/top/recent'}, this.ajaxRequest);
-		console.log('RECENT FUNCTION')
-		this.componentDidMount();
 	};
 	componentDidMount(){
 		this.ajaxRequest();
@@ -106,18 +112,17 @@ class Leaderboard extends React.Component {
 			recent={camper.recent} alltime={camper.alltime} img={camper.img}/>);
 	}
 	render(){
-
 		return (
 			<div>
 				<Title/>
-					<table className="hovertable">
+					<table className="table">
 						<Header onClickRecent={this.props.onClickRecent} onClickAllTime={this.props.onClickAllTime}/>
 						{this.props.users.map(this.eachCamper)}
 					</table>
+				<Footer/>
 			</div>
-			);
+		);
 	}
 };
-
 
 ReactDOM.render(<Data/>, document.getElementById('container'));

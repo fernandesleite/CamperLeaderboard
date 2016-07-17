@@ -1,57 +1,88 @@
 @charset "UTF-8";
 * {
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  color: #000; }
 
 body {
   background: url("../imgs/background.jpg") no-repeat center fixed;
   background-size: cover; }
 
-a {
-  text-decoration: none !important;
-  display: block;
+body, html {
   height: 100%; }
 
-h1 {
-  margin: 10px;
-  text-align: center; }
-
 #container {
-  background: rgba(200, 137, 58, 0.5);
-  border-radius: 10px; }
+  background: rgba(200, 137, 58, 0.3);
+  border-radius: 10px;
+  height: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: absolute; }
 
-.hovertable {
+.title {
+  background-color: #5B3911;
+  color: #fff;
+  height: auto;
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 25px;
+  border-bottom: 5px solid #FFD095; }
+  .title .fcclogo {
+    width: 300px;
+    display: block;
+    margin: 10px auto; }
+  .title h1 {
+    margin: 10px;
+    text-align: center;
+    color: #fff; }
+
+.table {
   border-collapse: collapse;
-  margin: auto; }
-  .hovertable tr {
-    background-color: #FFD095; }
-    .hovertable tr:hover {
-      background-color: #FFC67E; }
+  margin: 0 auto;
+  max-width: 960px;
+  width: 70%; }
+  .table .headerRow {
+    background-color: #5B3911;
+    border-top: transparent;
+    border-bottom: transparent; }
+    .table .headerRow th {
+      padding: 10px;
+      text-align: center; }
+    .table .headerRow .camperName {
+      text-align: left; }
+    .table .headerRow .classOn {
+      color: white;
+      pointer-events: none; }
+      .table .headerRow .classOn::after {
+        content: " ▼"; }
+    .table .headerRow .classOff {
+      cursor: pointer; }
+  .table .camperRow {
+    background-color: #FFD095;
+    border: 2px solid rgba(200, 137, 58, 0.7);
+    border-right: transparent;
+    border-left: transparent;
+    border-top: transparent; }
+    .table .camperRow:hover {
+      background-color: #FFC67E;
+      cursor: pointer;
+      font-weight: bold; }
+    .table .camperRow .num {
+      text-align: center; }
+    .table .camperRow .camper {
+      width: 50%;
+      padding: 5px 3px; }
+      .table .camperRow .camper .avatar {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border: 2px solid transparent;
+        vertical-align: middle;
+        border-radius: 50%; }
 
-tr, th {
-  color: black;
-  border: 1px solid #C8893A;
-  border-right: transparent;
-  border-left: transparent;
-  padding: 5px;
-  background-color: #FFD095; }
-
-.num {
-  text-align: center; }
-
-.camper {
-  width: 50%;
-  padding: 5px 0; }
-  .camper .avatar {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-    border: 2px solid white;
-    vertical-align: middle; }
-  .camper span {
-    color: black; }
-
-.classOn {
-  color: #5B3911;
-  text-decoration: underline; }
-  .classOn::after {
-    content: " ▼"; }
+.footer {
+  background-color: #5B3911;
+  text-align: center;
+  margin-top: 10px; }
+  .footer span {
+    color: #fff; }

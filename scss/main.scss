@@ -1,69 +1,115 @@
 $background: "../imgs/background.jpg";
+$black: #000;
+$white: #fff;
+$header-color: #5B3911;
+$background-color: #C8893A;
+$hover-color: #FFC67E;
+$primary-color: #FFD095;
+
 *{
 	font-family:'Roboto', sans-serif;
+	color:$black;
 }
 
 body{
 	background: url($background) no-repeat center fixed; 
 	background-size:cover;
+}
 
+body, html{
+	height:100%;
 }
-a{
-	text-decoration: none !important;
-	display: block; height: 100%;
-}
-h1{
-	margin:10px;
-	text-align:center
-}
+
 #container{
-	background: rgba(200, 137, 58, 0.5);
+	background: rgba($background-color, 0.3);
 	border-radius:10px;
+	height:auto;
+	top:0;
+	left:0;
+	width:100%;
+	position:absolute;
 }
 
-.hovertable{
+.title{
+	background-color:$header-color;
+	color:$white;
+	height:auto;
+	width:100%;
+	display:inline-block;
+	margin-bottom:25px;
+	border-bottom:5px solid $primary-color;
+	.fcclogo{
+		width:300px;
+		display: block;
+		margin: 10px auto;
+	}
+	h1{
+		margin:10px;
+		text-align:center;
+		color:$white;
+	}
+}
+
+.table{
 	border-collapse: collapse;
-	margin:auto;		
-	tr{
-		background-color:#FFD095;
+	margin:0 auto;
+	max-width: 960px;
+	width:70%;
+	.headerRow{
+		background-color:$header-color;
+		border-top:transparent;
+		border-bottom:transparent;
+		th{
+			padding:10px;
+			text-align: center;
+		}
+		.camperName{
+			text-align: left;
+		}
+		.classOn{
+			color:white;
+			pointer-events: none;
+			&::after{
+				content: " ▼";
+			}
+		}
+		.classOff{
+			cursor:pointer;
+		}
+	}
+	.camperRow{
+		background-color: $primary-color;
+		border: 2px solid rgba($background-color, 0.7);
+		border-right:transparent;
+		border-left:transparent;
+		border-top:transparent;
 		&:hover{
-			background-color:#FFC67E;
+			background-color:$hover-color;
+			cursor: pointer;
+			font-weight:bold;
+		}
+		.num{
+			text-align:center;
+		}
+		.camper{
+			width:50%;
+			padding:5px 3px;
+			.avatar{
+				width:50px;
+				height:50px;
+				margin-right: 10px;
+				border: 2px solid transparent;
+				vertical-align: middle;
+				border-radius:50%;
+			}
 		}
 	}
 }
-
-tr, th{
-	color:black;
-	border: 1px solid #C8893A;
-	border-right:transparent;
-	border-left:transparent;
-	padding:5px;
-	background-color:#FFD095;
-}
-.num{
+.footer{
+	background-color:$header-color;
 	text-align:center;
-}
-.camper{
-	width:50%;
-	padding:5px 0;
-	.avatar{
-		width:50px;
-		height:50px;
-		margin-right: 10px;
-		border: 2px solid white;
-		vertical-align: middle;
-	}
+	margin-top:10px;
 	span{
-		color:black;	
-		&:visited{
-
-		}
-	}
-}
-.classOn{
-	color:#5B3911;
-	text-decoration:underline;
-	&::after{
-		content: " ▼";
+		color:$white;		
 	}
 }
